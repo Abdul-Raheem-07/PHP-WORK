@@ -1,32 +1,55 @@
 <?php
 
+require_once "functions.php";
+
+
 echo "----------------------------------------<br>";
 echo "Student Management System<br>";
+
 
 $studentName = "Abdul Raheem";
 $studentId = "2026-SE-001";
 $course = "Data Structures";
 $semester = 3;
 
+
 $fee = "50000";
 $quantity = "1";
 $discount = 10;
 
 
-// Type Casting
+// ==========================================
+// TYPE CASTING
+// ==========================================
+
 $fee = (float) $fee;
 $quantity = (int) $quantity;
 
 
-// Fee Calculation
-$finalFee = $fee * $quantity - ($fee * $quantity * $discount / 100);
+// ==========================================
+// FEE CALCULATION
+// ==========================================
+
+$finalFee = calculateFinalFee(
+    $fee,
+    $quantity,
+    $discount
+);
 
 
 echo "----------------------------------------<br>";
-echo "Student Name: $studentName<br>";
-echo "Course: " . $course . "<br>";
-echo "Semester: $semester<br>";
+
+echo displayStudent(
+    $studentName,
+    $studentId,
+    $course,
+    $semester
+);
+
+echo "<br>";
+
 echo "Final Fee: " . sprintf("%.2f", $finalFee) . "<br>";
+
 echo "-----------------------------------------<br>";
 
 
@@ -35,26 +58,15 @@ echo "-----------------------------------------<br>";
 // ==========================================
 
 $marks = 86;
-$grade = "";
 
-if ($marks >= 85) {
-    $grade = "A+";
-} elseif ($marks >= 80) {
-    $grade = "A";
-} elseif ($marks >= 70) {
-    $grade = "B";
-} elseif ($marks >= 60) {
-    $grade = "C";
-} elseif ($marks >= 50) {
-    $grade = "D";
-} else {
-    $grade = "F";
-}
+$grade = getGrade($marks);
 
 echo "Grade: $grade<br>";
 
 
-// Comparison vs Identity
+// ==========================================
+// COMPARISON VS IDENTITY
+// ==========================================
 
 var_dump($marks == 80);
 
@@ -69,32 +81,7 @@ echo "<br>";
 // REMARKS - SWITCH
 // ==========================================
 
-switch ($grade) {
-
-    case "A+":
-        $switchRemark = "Excellent! Keep up the good work.";
-        break;
-
-    case "A":
-        $switchRemark = "Great job! You're doing well.";
-        break;
-
-    case "B":
-        $switchRemark = "Good effort! You can do better.";
-        break;
-
-    case "C":
-        $switchRemark = "You're passing, but there's room for improvement.";
-        break;
-
-    case "D":
-        $switchRemark = "You need to put in more effort.";
-        break;
-
-    default:
-        $switchRemark = "You failed. Please seek help.";
-        break;
-}
+$switchRemark = getSwitchRemark($grade);
 
 echo "Switch Remark: $switchRemark<br>";
 
@@ -103,26 +90,7 @@ echo "Switch Remark: $switchRemark<br>";
 // REMARKS - MATCH
 // ==========================================
 
-$matchRemark = match (true) {
-
-    $marks >= 85 =>
-        "Excellent! Keep up the good work.",
-
-    $marks >= 80 =>
-        "Great job! You're doing well.",
-
-    $marks >= 70 =>
-        "Good effort! You can do better.",
-
-    $marks >= 60 =>
-        "You're passing, but there's room for improvement.",
-
-    $marks >= 50 =>
-        "You need to put in more effort.",
-
-    default =>
-        "You failed. Please seek help."
-};
+$matchRemark = getMatchRemark($marks);
 
 echo "Match Remark: $matchRemark<br>";
 
@@ -139,6 +107,7 @@ $subjects = [
     "Software Engineering",
     "Data Structures"
 ];
+
 
 $i = 1;
 
@@ -218,7 +187,9 @@ $subjectMarks = [
     "Software Engineering" => 90
 ];
 
+
 echo "Checking subjects...<br><br>";
+
 
 foreach ($subjectMarks as $subject => $mark) {
 
@@ -232,6 +203,40 @@ foreach ($subjectMarks as $subject => $mark) {
     }
 }
 
+
 echo "<br>----------------------------------------<br>";
+
+
+// ==========================================
+// DEFAULT PARAMETER
+// ==========================================
+
+echo greetStudent($studentName);
+
+echo "<br>";
+
+echo greetStudent(
+    $studentName,
+    "Good Morning"
+);
+
+echo "<br>----------------------------------------<br>";
+
+
+// ==========================================
+// VARIADIC FUNCTION
+// ==========================================
+
+$averageMarks = calculateAverage(
+    85,
+    78,
+    86,
+    90
+);
+
+echo "Average Marks: " . sprintf("%.2f", $averageMarks);
+
+echo "<br>----------------------------------------<br>";
+
 
 ?>
