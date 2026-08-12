@@ -1,6 +1,6 @@
 <?php
 
-require_once "Functions.php";
+require_once('Function.php');
 
 
 echo "----------------------------------------<br>";
